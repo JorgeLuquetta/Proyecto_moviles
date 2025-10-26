@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "941663432317",
+    "project_id": "proyectomoviles-f82a9",
+    "storage_bucket": "proyectomoviles-f82a9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941663432317:android:1a6f9b3681d60c9dc64b14",
+        "android_client_info": {
+          "package_name": "me.jorgeluquetta.proyecto_moviles"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXrmKHs9__5cd0HxNAgF1wZPxNr1LWJ88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
