@@ -113,7 +113,7 @@ fun RegisterScreen(onClickBack :()-> Unit = {}, onSuccessfulRegister:()-> Unit =
                 text = "Registro de Usuario",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFFFF9900)
+                color = Color(0xFF1A1A2E)
             )
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -256,7 +256,7 @@ fun RegisterScreen(onClickBack :()-> Unit = {}, onSuccessfulRegister:()-> Unit =
                     .fillMaxWidth()
                     .height(50.dp),
                 shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF9900))
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE1131F))
             ) {
                 Text(
                     text = "Registrarse",

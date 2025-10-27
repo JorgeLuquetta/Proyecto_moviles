@@ -26,48 +26,51 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
-            var startDestination = "welcome"
-
-            val auth = Firebase.auth
-            val currentUser = auth.currentUser
-
-            if(currentUser != null){
-                startDestination = "welcome"
-            }else{
-                startDestination = "login"
-            }
 
             NavHost(
                 navController = navController,
-                startDestination = startDestination,
+                startDestination = "welcome",
                 modifier = Modifier.fillMaxSize()
             ) {
-                composable(route = "login"){
-                    LoginScreen(onClickRegister = {
-                        navController.navigate("register")
-                    }, onSuccessfulLogin = {
-                        navController.navigate("welcome"){
-                            popUpTo("login"){inclusive = true}
-                        }
-                    })
-                }
-                composable(route = "register") {
-                    RegisterScreen(onClickBack = {
-                        navController.popBackStack()
-                    }, onSuccessfulRegister = {
-                        navController.navigate("welcome"){
-                            popUpTo(0)
-                        }
-                    })
-                }
                 composable(route = "welcome") {
-                    WelcomeScreen(onClickLogout = {
-                        navController.navigate("login"){
-                            popUpTo(0)
+                    WelcomeScreen(
+                        onLoginClick = {
+                            navController.navigate("login")
+                        },
+                        onRegisterClick = {
+                            navController.navigate("register")
                         }
-                    })
+                    )
                 }
 
+                composable(route = "login") {
+                    LoginScreen(
+                        onClickRegister = {
+                            navController.navigate("register")
+                        },
+                        onSuccessfulLogin = {
+                            navController.navigate("map") {
+                                popUpTo("login") { inclusive = true }
+                            }
+                        }
+                    )
+                }
+
+                composable(route = "register") {
+                    RegisterScreen(
+                        onClickBack = {
+                            navController.popBackStack()
+                        },
+                        onSuccessfulRegister = {
+                            navController.navigate("welcome") {
+                                popUpTo("register") { inclusive = true }
+                            }
+                        }
+                    )
+                }
+                composable(route = "map") {
+                    MapScreen()
+                }
             }
         }
     }

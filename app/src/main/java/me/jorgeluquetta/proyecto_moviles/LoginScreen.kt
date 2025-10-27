@@ -63,9 +63,6 @@ fun LoginScreen(onClickRegister : ()-> Unit = {}, onSuccessfulLogin : ()-> Unit 
     var emailError by remember { mutableStateOf("")}
     var passwordError by remember { mutableStateOf("")}
 
-
-
-
     Scaffold { paddingValues ->
         Column(
             modifier = Modifier
@@ -91,7 +88,7 @@ fun LoginScreen(onClickRegister : ()-> Unit = {}, onSuccessfulLogin : ()-> Unit 
                 text = "Iniciar Sesión",
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFFFF9900)
+                color = Color(0xFF1A1A2E)
             )
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -195,7 +192,7 @@ fun LoginScreen(onClickRegister : ()-> Unit = {}, onSuccessfulLogin : ()-> Unit 
                     .fillMaxWidth()
                     .height(50.dp),
                 shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF9900)) // Color morado
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE1131F))
             ) {
                 Text(
                     text = "Iniciar Sesión",
@@ -208,7 +205,7 @@ fun LoginScreen(onClickRegister : ()-> Unit = {}, onSuccessfulLogin : ()-> Unit 
             TextButton(onClick = onClickRegister) {
                 Text(
                     text = "¿No tienes una cuenta? Regístrate",
-                    color = Color(0xFFFF9900)
+                    color = Color(0xFF1A1A2E)
                 )
             }
         }

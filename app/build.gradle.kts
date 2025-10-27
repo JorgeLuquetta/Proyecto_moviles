@@ -27,6 +27,7 @@ android {
                 "proguard-rules.pro"
             )
         }
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -58,13 +59,23 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.androidx.compose.material.icons.extended)
+
 
     //Navigation compose
     implementation(libs.androidx.navigation.compose)
 
     //Firebase
-    implementation(libs.firebase.bom)
+    implementation(platform(libs.firebase.bom))
 
     //Auth
     implementation(libs.firebase.auth)
+
+    //GoogleMaps
+    implementation(libs.play.services.maps)
+    //para usar googblemap en composable
+    implementation(libs.maps.compose)
+    //usar la ubicacion del usuario
+    implementation(libs.play.services.location)
+
 }

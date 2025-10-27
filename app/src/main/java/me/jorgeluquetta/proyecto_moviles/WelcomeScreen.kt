@@ -36,7 +36,7 @@ import androidx.compose.ui.unit.sp
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
-@Preview
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WelcomeScreen(
@@ -71,10 +71,10 @@ fun WelcomeScreen(
         Spacer(modifier = Modifier.height(40.dp))
 
         Text(
-            text = "Welcome",
+            text = "Bienvenido",
             fontSize = 26.sp,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF0C0C24)
+            color = Color(0xFF1A1A2E)
         )
 
         Spacer(modifier = Modifier.height(40.dp))
@@ -84,7 +84,7 @@ fun WelcomeScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFD50000)),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE1131F)),
             shape = RoundedCornerShape(10.dp)
         ) {
             Text(text = "Login", color = Color.White, fontSize = 18.sp)
@@ -97,7 +97,7 @@ fun WelcomeScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFD50000)),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE1131F)),
             shape = RoundedCornerShape(10.dp)
         ) {
             Text(text = "Register", color = Color.White, fontSize = 18.sp)
