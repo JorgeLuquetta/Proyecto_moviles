@@ -1,4 +1,5 @@
 [versions]
+accompanistPermissions = "0.37.3"
 agp = "8.13.0"
 firebaseBom = "34.4.0"
 kotlin = "2.2.21"
@@ -14,9 +15,13 @@ firebaseAuth = "24.0.1"
 playServicesMaps = "19.2.0"
 mapscompose = "6.12.1"
 playserviceslocation = "21.3.0"
+navigationRuntimeKtx = "2.9.5"
+ui = "1.9.4"
+runtime = "1.9.4"
 
 
 [libraries]
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
@@ -38,6 +43,9 @@ firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
 maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "mapscompose" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playserviceslocation" }
+androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "ui" }
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
