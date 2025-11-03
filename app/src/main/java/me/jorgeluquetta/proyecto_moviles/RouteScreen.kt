@@ -29,7 +29,7 @@ data class RouteItem(
 
 // 🔹 Pantalla de Rutas
 @Composable
-fun RouteScreen(navController: NavHostController) {
+fun RouteScreen(navController: NavHostController, busViewModel: BusViewModel ) {
     val currentRoute = "route"
     var searchQuery by remember { mutableStateOf("") }
 
@@ -104,7 +104,10 @@ fun RouteScreen(navController: NavHostController) {
         ) {
             items(filteredRoutes) { route ->
                 RouteItemCard(route = route) { routeId ->
-                    navController.navigate("map?routeId=$routeId")
+                    navController.navigate("route_map/$routeId")
+
+
+
                 }
             }
         }
