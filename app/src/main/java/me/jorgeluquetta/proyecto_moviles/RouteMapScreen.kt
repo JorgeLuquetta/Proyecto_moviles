@@ -30,6 +30,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.*
 
 
+@SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RouteMapScreen(
@@ -53,14 +54,12 @@ fun RouteMapScreen(
                 modifier = Modifier.fillMaxSize(),
                 cameraPositionState = cameraPositionState
             ) {
-                // 🔹 Línea de la ruta
+                // Línea de la ruta
                 Polyline(
                     points = route,
                     color = Color.Blue,
                     width = 10f
                 )
-
-                // 🔹 Marcadores genéricos de Android
                 Marker(
                     state = MarkerState(position = route.first()),
                     title = "Inicio (Punto A)",
@@ -79,8 +78,7 @@ fun RouteMapScreen(
                 color = Color.Gray
             )
         }
-
-        // 🔙 Botón para volver
+        // Botón para volver
         FloatingActionButton(
             onClick = { navController.popBackStack() },
             modifier = Modifier
@@ -92,7 +90,6 @@ fun RouteMapScreen(
         }
     }
 }
-
 
 
 fun normalizeRouteId(raw: String): String {

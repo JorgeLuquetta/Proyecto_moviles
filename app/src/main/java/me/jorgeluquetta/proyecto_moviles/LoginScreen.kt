@@ -74,7 +74,6 @@ fun LoginScreen(onClickRegister : ()-> Unit = {}, onSuccessfulLogin : ()-> Unit 
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Ícono de Usuario (Material Icons)
             Image(
                 painter = painterResource(id = R.drawable.img_logo_movebga),
                 contentDescription = "Usuario",
@@ -83,7 +82,6 @@ fun LoginScreen(onClickRegister : ()-> Unit = {}, onSuccessfulLogin : ()-> Unit 
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Título
             Text(
                 text = "Iniciar Sesión",
                 fontSize = 28.sp,
@@ -102,7 +100,7 @@ fun LoginScreen(onClickRegister : ()-> Unit = {}, onSuccessfulLogin : ()-> Unit 
                     Icon(
                         imageVector = Icons.Default.Email,
                         contentDescription = "Email",
-                        tint = Color(0xFF666666) // Color gris
+                        tint = Color(0xFF666666)
                     )
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
@@ -130,7 +128,7 @@ fun LoginScreen(onClickRegister : ()-> Unit = {}, onSuccessfulLogin : ()-> Unit 
                     Icon(
                         imageVector = Icons.Default.Lock,
                         contentDescription = "Contraseña",
-                        tint = Color(0xFF666666) // Color gris
+                        tint = Color(0xFF666666)
                     )
                 },
                 visualTransformation = PasswordVisualTransformation(),
@@ -146,8 +144,8 @@ fun LoginScreen(onClickRegister : ()-> Unit = {}, onSuccessfulLogin : ()-> Unit 
                 },
                 shape = RoundedCornerShape(12.dp),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = Color(0xFF6200EE), // Color morado
-                    unfocusedBorderColor = Color(0xFFCCCCCC) // Color gris claro
+                    focusedBorderColor = Color(0xFF6200EE),
+                    unfocusedBorderColor = Color(0xFFCCCCCC)
                 )
             )
             Spacer(modifier = Modifier.height(24.dp))
@@ -184,8 +182,6 @@ fun LoginScreen(onClickRegister : ()-> Unit = {}, onSuccessfulLogin : ()-> Unit 
                                     }
                                 }
                             }
-                    }else{
-
                     }
                 },
                 modifier = Modifier

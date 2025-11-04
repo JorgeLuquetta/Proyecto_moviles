@@ -39,17 +39,37 @@ import kotlinx.coroutines.delay
 fun MapScreen(navController: NavController, busViewModel: BusViewModel) {
     val context = LocalContext.current
 
-    val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(LatLng(7.119349, -73.1227416), 13f)
+    val fusedLocationClient = remember {
+        LocationServices.getFusedLocationProviderClient(context)
     }
 
+    val cameraPositionState = rememberCameraPositionState()
     val busIcon = remember { bitmapDescriptorFromVector(context, R.drawable.ic_bus) }
 
-    // Escuchar actualizaciones del ViewModel
+    // Estado del ViewModel
     val busPositions by busViewModel.busPositions.collectAsState()
 
-    // Estado para mostrar info del bus seleccionado
+    // Estado de ubicación del usuario
+    var userLocation by remember { mutableStateOf<LatLng?>(null) }
+
+    // Mostrar info del bus seleccionado
     var selectedBusInfo by remember { mutableStateOf<BusInfo?>(null) }
+
+    // Obtener ubicación actual una sola vez
+    LaunchedEffect(Unit) {
+        try {
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                location?.let {
+                    val latLng = LatLng(it.latitude, it.longitude)
+                    userLocation = latLng
+                    // Centrar cámara en el usuario
+                    cameraPositionState.position = CameraPosition.fromLatLngZoom(latLng, 15f)
+                }
+            }
+        } catch (e: SecurityException) {
+            e.printStackTrace()
+        }
+    }
 
     Scaffold(
         bottomBar = { BottomBar(navController = navController, currentRoute = "map") }
@@ -62,14 +82,17 @@ fun MapScreen(navController: NavController, busViewModel: BusViewModel) {
             GoogleMap(
                 modifier = Modifier.fillMaxSize(),
                 cameraPositionState = cameraPositionState,
-                properties = MapProperties(mapType = MapType.NORMAL),
+                properties = MapProperties(
+                    mapType = MapType.NORMAL,
+                    isMyLocationEnabled = userLocation != null // Muestra el punto azul del usuario
+                ),
                 uiSettings = MapUiSettings(
                     zoomControlsEnabled = false,
                     myLocationButtonEnabled = true,
                     compassEnabled = true
                 )
             ) {
-                // 🔹 Mostrar todos los buses apenas iniciar
+                // Mostrar buses
                 busPositions.forEach { (routeKey, position) ->
                     val info = busViewModel.getBusInfo(routeKey)
                     if (busIcon != null && info != null) {
@@ -87,7 +110,7 @@ fun MapScreen(navController: NavController, busViewModel: BusViewModel) {
                 }
             }
 
-            // 🔹 Mostrar información del bus seleccionado
+            // Información del bus seleccionado
             selectedBusInfo?.let { info ->
                 AlertDialog(
                     onDismissRequest = { selectedBusInfo = null },
@@ -109,9 +132,6 @@ fun MapScreen(navController: NavController, busViewModel: BusViewModel) {
         }
     }
 }
-
-
-
 
 
 

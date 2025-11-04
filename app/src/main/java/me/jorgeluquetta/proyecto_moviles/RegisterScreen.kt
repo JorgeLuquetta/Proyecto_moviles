@@ -221,7 +221,6 @@ fun RegisterScreen(onClickBack :()-> Unit = {}, onSuccessfulRegister:()-> Unit =
             // Botón de Registro
             Button(
                 onClick = {
-
                     val isValidName = validateName(inputName).first
                     val isValidEmail = validateEmail(inputName).first
                     val isValidPassword = validatePassword(inputPassword).first

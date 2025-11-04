@@ -87,7 +87,7 @@ fun WelcomeScreen(
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE1131F)),
             shape = RoundedCornerShape(10.dp)
         ) {
-            Text(text = "Login", color = Color.White, fontSize = 18.sp)
+            Text(text = "Iniciar Sesión", color = Color.White, fontSize = 18.sp)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -100,7 +100,7 @@ fun WelcomeScreen(
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE1131F)),
             shape = RoundedCornerShape(10.dp)
         ) {
-            Text(text = "Register", color = Color.White, fontSize = 18.sp)
+            Text(text = "Registar", color = Color.White, fontSize = 18.sp)
         }
 
         Spacer(modifier = Modifier.height(40.dp))

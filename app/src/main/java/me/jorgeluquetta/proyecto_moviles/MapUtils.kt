@@ -20,7 +20,7 @@ fun bitmapDescriptorFromVector(
 ): BitmapDescriptor? {
     val vectorDrawable: Drawable? = ContextCompat.getDrawable(context, vectorResId)
     if (vectorDrawable == null) {
-        println("⚠️ Drawable no encontrado para recurso: $vectorResId")
+        println("Drawable no encontrado para recurso: $vectorResId")
         return null
     }
 
@@ -37,7 +37,7 @@ fun bitmapDescriptorFromVector(
         BitmapDescriptorFactory.fromBitmap(bitmap)
     } catch (e: Exception) {
         e.printStackTrace()
-        println("❌ Error creando BitmapDescriptorFactory: ${e.message}")
+        println("Error creando BitmapDescriptorFactory: ${e.message}")
         null
     }
 }

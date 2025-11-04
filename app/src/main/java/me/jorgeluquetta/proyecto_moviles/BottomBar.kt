@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Route
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,46 +24,51 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
+
 @Composable
 fun BottomBar(navController: NavController, currentRoute: String) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.White)
-            .padding(vertical = 10.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically
+    Surface(
+        color = Color.White,
+        shadowElevation = 6.dp
     ) {
-        BottomIconItem(
-            icon = Icons.Default.Map,
-            label = "Mapa",
-            color = if (currentRoute == "map") Color(0xFFE1131F) else Color.Gray
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            navController.navigate("map") {
-                popUpTo("map") { inclusive = false }
-                launchSingleTop = true
+            BottomIconItem(
+                icon = Icons.Default.Map,
+                label = "Mapa",
+                color = if (currentRoute == "map") Color(0xFFE1131F) else Color.Gray
+            ) {
+                navController.navigate("map") {
+                    popUpTo("map") { inclusive = false }
+                    launchSingleTop = true
+                }
             }
-        }
 
-        BottomIconItem(
-            icon = Icons.Default.Route,
-            label = "Rutas",
-            color = if (currentRoute == "route") Color(0xFFFFD700) else Color.Gray
-        ) {
-            navController.navigate("route") {
-                popUpTo("map") { inclusive = false }
-                launchSingleTop = true
+            BottomIconItem(
+                icon = Icons.Default.Route,
+                label = "Rutas",
+                color = if (currentRoute == "route") Color(0xFFFFD700) else Color.Gray
+            ) {
+                navController.navigate("route") {
+                    popUpTo("map") { inclusive = false }
+                    launchSingleTop = true
+                }
             }
-        }
 
-        BottomIconItem(
-            icon = Icons.Default.Settings,
-            label = "Configuración",
-            color = if (currentRoute == "settings") Color(0xFF0033CC) else Color.Gray
-        ) {
-            navController.navigate("settings") {
-                popUpTo("map") { inclusive = false }
-                launchSingleTop = true
+            BottomIconItem(
+                icon = Icons.Default.Settings,
+                label = "Configuración",
+                color = if (currentRoute == "settings") Color(0xFF0033CC) else Color.Gray
+            ) {
+                navController.navigate("settings") {
+                    popUpTo("map") { inclusive = false }
+                    launchSingleTop = true
+                }
             }
         }
     }
@@ -77,7 +83,10 @@ fun BottomIconItem(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.clickable { onClick() }
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .clickable { onClick() }
     ) {
         Icon(
             imageVector = icon,

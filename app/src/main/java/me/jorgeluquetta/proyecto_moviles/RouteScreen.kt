@@ -18,7 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 
-// 🔹 Modelo de datos
+//Modelo de datos
 data class RouteItem(
     val id: String,
     val title: String,
@@ -26,8 +26,6 @@ data class RouteItem(
     val description: String,
     val color: Color
 )
-
-// 🔹 Pantalla de Rutas
 @Composable
 fun RouteScreen(navController: NavHostController, busViewModel: BusViewModel ) {
     val currentRoute = "route"
@@ -38,24 +36,73 @@ fun RouteScreen(navController: NavHostController, busViewModel: BusViewModel ) {
         RouteItem(
             id = "hamacas",
             title = "HAMACAS",
-            subtitle = "CARRERA 33 • C.C. CACIQUE",
-            description = "CAMPANAZO • REPOSO",
-            color = Color(0xFFCF1A17) // rojo
+            subtitle = "CANCHA DE HAMACAS • CARRERA 33",
+            description = "",
+            color = Color(0xFFCF1A17)
         ),
         RouteItem(
             id = "caracoli",
             title = "CARACOLÍ",
-            subtitle = "CARRETERA ANTIGUA",
-            description = "CARRERA 33 • CENTRO",
-            color = Color(0xFFEDE430) // amarillo
+            subtitle = "CARACOLÍ CENTRO COMERCIAL • CARRERA 33",
+            description = "",
+            color = Color(0xFFEDE430)
         ),
         RouteItem(
             id = "cumbre",
             title = "CUMBRE",
-            subtitle = "CARRERA 33 • MEGAMALL",
-            description = "ESTADIO • SAN FRANCISCO • SANTOTO",
-            color = Color(0xFFCF1A17) // rojo
-        )
+            subtitle = "CUMBRE • CARRERA 33",
+            description = "",
+            color = Color(0xFFCF1A17)
+        ),
+        RouteItem(
+            id = "cristal bajo",
+            title = "CRITAL BAJO",
+            subtitle = "CRISTAL BAJO • CARRERA 33",
+            description = "",
+            color = Color(0xFFEDE430)
+        ),
+        RouteItem(
+            id = "inem",
+            title = "INEM",
+            subtitle = "INEM • BUENAVISTA",
+            description = "",
+            color = Color(0xFFCF1A17)
+        ),
+        RouteItem(
+            id = "trinidad",
+            title = "TRINIDAD",
+            subtitle = "TRINIDAD • CACIQUE CENTRO COMERCIAL",
+            description = "",
+            color = Color(0xFFEDE430)
+        ),
+        RouteItem(
+            id = "la feria",
+            title = "LA FERIA",
+            subtitle = "LA FERIA • SAN MATEO",
+            description = "",
+            color = Color(0xFFCF1A17)
+        ),
+        RouteItem(
+            id = "maria paz",
+            title = "MARÍA PAZ",
+            subtitle = "MARÍA PAZ • AVENIDA QUEBRADASECA",
+            description = "",
+            color = Color(0xFFEDE430)
+        ),
+        RouteItem(
+            id = "caldas",
+            title = "CALDAS",
+            subtitle = "CALDAS • CENTRO",
+            description = "",
+            color = Color(0xFFCF1A17)
+        ),
+        RouteItem(
+            id = "cra 33",
+            title = "CRA 33",
+            subtitle = "CRA 33 • CUMBRE",
+            description = "",
+            color = Color(0xFFEDE430)
+        ),
     )
 
     // Filtrar rutas según la búsqueda
@@ -70,10 +117,8 @@ fun RouteScreen(navController: NavHostController, busViewModel: BusViewModel ) {
             .fillMaxSize()
             .background(Color.White)
     ) {
-
-        // --- Título ---
         Text(
-            text = "Route",
+            text = "Rutas",
             style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
             textAlign = TextAlign.Center,
             modifier = Modifier
@@ -81,11 +126,11 @@ fun RouteScreen(navController: NavHostController, busViewModel: BusViewModel ) {
                 .padding(top = 16.dp, bottom = 8.dp)
         )
 
-        // --- Barra de búsqueda ---
+        // Barra de búsqueda
         OutlinedTextField(
             value = searchQuery,
             onValueChange = { searchQuery = it },
-            placeholder = { Text("Search route") },
+            placeholder = { Text("Ruta de búsqueda") },
             leadingIcon = {
                 Icon(Icons.Default.Search, contentDescription = "Buscar")
             },
@@ -96,7 +141,7 @@ fun RouteScreen(navController: NavHostController, busViewModel: BusViewModel ) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // --- Lista de rutas ---
+        // Lista de rutas
         LazyColumn(
             modifier = Modifier
                 .weight(1f)
@@ -112,12 +157,12 @@ fun RouteScreen(navController: NavHostController, busViewModel: BusViewModel ) {
             }
         }
 
-        // --- Barra inferior ---
+        //Barra inferior
         BottomBar(navController = navController, currentRoute = currentRoute)
     }
 }
 
-// 🔹 Tarjeta individual de ruta
+//Tarjeta individual de ruta
 @Composable
 fun RouteItemCard(
     route: RouteItem,
@@ -132,7 +177,7 @@ fun RouteItemCard(
         shape = MaterialTheme.shapes.medium
     ) {
         Column(modifier = Modifier.background(Color.White)) {
-            // --- Encabezado del cartel ---
+            // Encabezado del cartel
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -153,7 +198,7 @@ fun RouteItemCard(
                 )
             }
 
-            // --- Detalle de la ruta ---
+            // Detalle de la ruta
             Row(
                 modifier = Modifier
                     .padding(12.dp)
