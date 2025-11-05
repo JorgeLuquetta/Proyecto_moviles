@@ -7,13 +7,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Key
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Security
@@ -48,35 +51,43 @@ fun SettingsScreen(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFFF9F9F9))
+            .padding(horizontal = 16.dp)
     ) {
+        // Título
         Text(
             text = "Configuración",
-            style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
+            style = MaterialTheme.typography.headlineMedium.copy(
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF222222)
+            ),
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp, bottom = 8.dp)
+                .padding(top = 32.dp, bottom = 24.dp)
         )
 
-        // Sección de opciones
+        // Contenedor principal de opciones
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
+                .weight(1f)
                 .background(Color.White, shape = RoundedCornerShape(16.dp))
+                .padding(vertical = 4.dp)
         ) {
             SettingItem(
                 icon = Icons.Default.Key,
                 iconColor = Color(0xFFEDE430),
                 text = "Cambio de contraseña"
             )
-            Divider()
+            Divider(thickness = 0.5.dp, color = Color(0xFFE0E0E0))
+
             SettingItem(
                 icon = Icons.Default.TextFields,
                 iconColor = Color(0xFFEDE430),
-                text = "Tamño de texto"
+                text = "Tamaño de texto"
             )
-            Divider()
+            Divider(thickness = 0.5.dp, color = Color(0xFFE0E0E0))
+
             SettingSwitchItem(
                 icon = Icons.Default.DarkMode,
                 iconColor = Color(0xFFEDE430),
@@ -84,32 +95,55 @@ fun SettingsScreen(navController: NavController) {
                 checked = darkMode,
                 onCheckedChange = { darkMode = it }
             )
-            Divider()
+            Divider(thickness = 0.5.dp, color = Color(0xFFE0E0E0))
+
             SettingItem(
                 icon = Icons.Default.Notifications,
                 iconColor = Color(0xFFEDE430),
                 text = "Notificaciones"
             )
-            Divider()
+            Divider(thickness = 0.5.dp, color = Color(0xFFE0E0E0))
+
             SettingItem(
                 icon = Icons.Default.Security,
                 iconColor = Color(0xFFEDE430),
                 text = "Privacidad"
             )
+            Divider(thickness = 0.5.dp, color = Color(0xFFE0E0E0))
+
+            // NUEVA OPCIÓN: Cerrar sesión
+            SettingItem(
+                icon = Icons.Default.ExitToApp,
+                iconColor = Color(0xFFE74C3C),
+                text = "Cerrar sesión",
+                onClick = {
+                    // Aquí va tu lógica para cerrar sesión
+                    // Por ejemplo, limpiar FirebaseAuth o SharedPreferences
+                    navController.navigate("login") {
+                        popUpTo(0) // Limpia el stack de navegación
+                    }
+                }
+            )
         }
 
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.height(16.dp))
 
+        // Barra inferior
         BottomBar(navController = navController, currentRoute = currentRoute)
     }
 }
 
 @Composable
-fun SettingItem(icon: ImageVector, iconColor: Color, text: String) {
+fun SettingItem(
+    icon: ImageVector,
+    iconColor: Color,
+    text: String,
+    onClick: () -> Unit = {}
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { }
+            .clickable { onClick() }
             .padding(vertical = 14.dp, horizontal = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

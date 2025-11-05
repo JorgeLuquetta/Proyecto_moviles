@@ -22,23 +22,36 @@ class BusViewModel : ViewModel() {
     // Información de los buses
     private val busInfoMap = mapOf(
         "hamacas" to BusInfo(
-            nombreRuta = "Hamacas",
-            conductor = "Juan Gómez",
-            placa = "ABC-123",
+            nombreRuta = "Hamacas - Carrera 33",
+            conductor = "Carlos Pérez",
+            placa = "TMB-101",
             pasajeros = 30
         ),
         "caracoli" to BusInfo(
-            nombreRuta = "Caracolí",
-            conductor = "María Rojas",
+            nombreRuta = "Caracolí Centro Comercial - Carrera 33",
+            conductor = "María Gómez",
             placa = "DEF-456",
             pasajeros = 25
         ),
         "cumbre" to BusInfo(
-            nombreRuta = "Cumbre",
-            conductor = "Carlos Díaz",
+            nombreRuta = "Cumbre - Carrera 33",
+            conductor = "Luis Díaz",
+            placa = "TMB-303",
+            pasajeros = 30
+        ),
+        "la feria" to BusInfo(
+            nombreRuta = "La Feria - San Mateo",
+            conductor = "Ana Rodríguez",
             placa = "GHI-789",
+            pasajeros = 28
+        ),
+        "cra 33" to BusInfo(
+            nombreRuta = "Cra 33 - Cumbre",
+            conductor = "Pedro Martínez",
+            placa = "JKL-234",
             pasajeros = 20
         ),
+
     )
 
     // Posiciones actuales de los buses

@@ -99,9 +99,11 @@ fun normalizeRouteId(raw: String): String {
 
 fun BusInfo(routeName: String): BusInfo? {
     return when (routeName.lowercase()) {
-        "hamacas" -> BusInfo("Hamacas", "Carlos Pérez", "TMB-101", 40)
-        "caracoli" -> BusInfo("Caracolí", "María Gómez", "TMB-202", 35)
-        "cumbre" -> BusInfo("Cumbre", "Luis Díaz", "TMB-303", 30)
+        "hamacas" -> BusInfo("Hamacas - Carrera 33", "Carlos Pérez", "TMB-101", 30)
+        "caracoli" -> BusInfo("Caracolí Centro Comercial - Carrera 33", "María Gómez", "DEF-456", 25)
+        "cumbre" -> BusInfo("Cumbre - Carrera 33", "Luis Díaz", "TMB-303", 30)
+        "la feria" -> BusInfo("La Feria - San Mateo", "Ana Rodríguez", "GHI-789", 28)
+        "cra 33" -> BusInfo("Cra 33 - Cumbre", "Pedro Martínez", "JKL-234", 20)
         else -> null
     }
 }
