@@ -81,6 +81,10 @@ class MainActivity : ComponentActivity() {
                     composable("settings") {
                         SettingsScreen(navController)
                     }
+                    // Pantalla de cambio de contraseña
+                    composable("change_password") {
+                        ChangePasswordScreen(navController)
+                    }
                 }
             }
         }
