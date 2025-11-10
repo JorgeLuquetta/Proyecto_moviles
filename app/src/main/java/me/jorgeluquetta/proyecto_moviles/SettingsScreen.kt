@@ -40,6 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.google.firebase.auth.FirebaseAuth
 
 
 @Composable
@@ -77,7 +78,10 @@ fun SettingsScreen(navController: NavController) {
             SettingItem(
                 icon = Icons.Default.Key,
                 iconColor = Color(0xFFEDE430),
-                text = "Cambio de contraseña"
+                text = "Cambiar contraseña",
+                onClick = {
+                    navController.navigate("change_password")
+                }
             )
             Divider(thickness = 0.5.dp, color = Color(0xFFE0E0E0))
 
@@ -117,6 +121,7 @@ fun SettingsScreen(navController: NavController) {
                 iconColor = Color(0xFFE74C3C),
                 text = "Cerrar sesión",
                 onClick = {
+
                     // Aquí va tu lógica para cerrar sesión
                     // Por ejemplo, limpiar FirebaseAuth o SharedPreferences
                     navController.navigate("login") {
