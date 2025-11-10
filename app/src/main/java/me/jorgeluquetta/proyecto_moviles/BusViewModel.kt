@@ -39,11 +39,41 @@ class BusViewModel : ViewModel() {
             placa = "TMB-303",
             pasajeros = 30
         ),
+        "cristal bajo" to BusInfo(
+            nombreRuta = "Cristal Bajo - Carrera 33",
+            conductor = "Camila Perez",
+            placa = "HIJ-876",
+            pasajeros = 28
+        ),
+        "inem" to BusInfo(
+            nombreRuta = "IMEM - Buenavista",
+            conductor = "Juan García",
+            placa = "ABC-123",
+            pasajeros = 25
+        ),
+        "trinidad" to BusInfo(
+            nombreRuta = "Trinidad - Cacique Centro Comercia",
+            conductor = "Lucas Rodríguez",
+            placa = "WTP-540",
+            pasajeros = 28
+        ),
         "la feria" to BusInfo(
             nombreRuta = "La Feria - San Mateo",
             conductor = "Ana Rodríguez",
             placa = "GHI-789",
             pasajeros = 28
+        ),
+        "maria paz" to BusInfo(
+            nombreRuta = "Maria Paz - Avenida Quebradaseca",
+            conductor = "Pedro Martínez",
+            placa = "JKL-234",
+            pasajeros = 20
+        ),
+        "caldas" to BusInfo(
+            nombreRuta = "Caldas - Centro",
+            conductor = "María Gómez",
+            placa = "DEF-456",
+            pasajeros = 25
         ),
         "cra 33" to BusInfo(
             nombreRuta = "Cra 33 - Cumbre",
