@@ -100,7 +100,7 @@ fun WelcomeScreen(
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE1131F)),
             shape = RoundedCornerShape(10.dp)
         ) {
-            Text(text = "Registar", color = Color.White, fontSize = 18.sp)
+            Text(text = "Registrar", color = Color.White, fontSize = 18.sp)
         }
 
         Spacer(modifier = Modifier.height(40.dp))

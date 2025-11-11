@@ -18,10 +18,13 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
@@ -40,6 +43,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -62,6 +66,8 @@ fun LoginScreen(onClickRegister : ()-> Unit = {}, onSuccessfulLogin : ()-> Unit 
     var loginError by remember { mutableStateOf("")}
     var emailError by remember { mutableStateOf("")}
     var passwordError by remember { mutableStateOf("")}
+
+    var passwordVisible by remember { mutableStateOf(false) }
 
     Scaffold { paddingValues ->
         Column(
@@ -131,11 +137,28 @@ fun LoginScreen(onClickRegister : ()-> Unit = {}, onSuccessfulLogin : ()-> Unit 
                         tint = Color(0xFF666666)
                     )
                 },
-                visualTransformation = PasswordVisualTransformation(),
+                // 👁️ Toggle de visibilidad
+                trailingIcon = {
+                    val image = if (passwordVisible)
+                        Icons.Filled.Visibility
+                    else
+                        Icons.Filled.VisibilityOff
+
+                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                        Icon(
+                            imageVector = image,
+                            contentDescription = if (passwordVisible) "Ocultar contraseña" else "Mostrar contraseña"
+                        )
+                    }
+                },
+                visualTransformation = if (passwordVisible)
+                    VisualTransformation.None
+                else
+                    PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 modifier = Modifier.fillMaxWidth(),
                 supportingText = {
-                    if (passwordError.isNotEmpty()){
+                    if (passwordError.isNotEmpty()) {
                         Text(
                             text = passwordError,
                             color = Color.Red

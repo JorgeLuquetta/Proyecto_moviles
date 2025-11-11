@@ -20,6 +20,8 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -42,6 +44,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -71,6 +74,9 @@ fun RegisterScreen(onClickBack :()-> Unit = {}, onSuccessfulRegister:()-> Unit =
     var confirmPasswordError by remember { mutableStateOf("") }
 
     var registerError by remember { mutableStateOf("") }
+
+    var passwordVisible by remember { mutableStateOf(false) }
+    var confirmPasswordVisible by remember { mutableStateOf(false) }
 
 
     Scaffold(
@@ -166,20 +172,33 @@ fun RegisterScreen(onClickBack :()-> Unit = {}, onSuccessfulRegister:()-> Unit =
             // Campo de Contraseña
             OutlinedTextField(
                 value = inputPassword,
-                onValueChange = {inputPassword = it},
+                onValueChange = { inputPassword = it },
                 label = { Text("Contraseña") },
                 leadingIcon = {
                     Icon(imageVector = Icons.Default.Lock, contentDescription = "Contraseña")
                 },
-                supportingText = {
-                    if (passwordError.isNotEmpty()){
-                        Text(
-                            text = passwordError,
-                            color = Color.Red
+                trailingIcon = {
+                    val icon = if (passwordVisible)
+                        Icons.Filled.Visibility
+                    else
+                        Icons.Filled.VisibilityOff
+
+                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                        Icon(
+                            imageVector = icon,
+                            contentDescription = if (passwordVisible) "Ocultar contraseña" else "Mostrar contraseña"
                         )
                     }
                 },
-                visualTransformation = PasswordVisualTransformation(),
+                supportingText = {
+                    if (passwordError.isNotEmpty()) {
+                        Text(text = passwordError, color = Color.Red)
+                    }
+                },
+                visualTransformation = if (passwordVisible)
+                    VisualTransformation.None
+                else
+                    PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp)
@@ -190,29 +209,40 @@ fun RegisterScreen(onClickBack :()-> Unit = {}, onSuccessfulRegister:()-> Unit =
             // Campo de Confirmar Contraseña
             OutlinedTextField(
                 value = inputPasswordConfirmation,
-                onValueChange = {inputPasswordConfirmation = it},
+                onValueChange = { inputPasswordConfirmation = it },
                 label = { Text("Confirmar Contraseña") },
                 leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Lock,
-                        contentDescription = "Confirmar Contraseña"
-                    )
+                    Icon(imageVector = Icons.Default.Lock, contentDescription = "Confirmar Contraseña")
                 },
-                supportingText = {
-                    if (passwordError.isNotEmpty()){
-                        Text(
-                            text = passwordError,
-                            color = Color.Red
+                trailingIcon = {
+                    val icon = if (confirmPasswordVisible)
+                        Icons.Filled.Visibility
+                    else
+                        Icons.Filled.VisibilityOff
+
+                    IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible }) {
+                        Icon(
+                            imageVector = icon,
+                            contentDescription = if (confirmPasswordVisible) "Ocultar contraseña" else "Mostrar contraseña"
                         )
                     }
                 },
-                visualTransformation = PasswordVisualTransformation(),
+                supportingText = {
+                    if (confirmPasswordError.isNotEmpty()) {
+                        Text(text = confirmPasswordError, color = Color.Red)
+                    }
+                },
+                visualTransformation = if (confirmPasswordVisible)
+                    VisualTransformation.None
+                else
+                    PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp)
             )
 
-            if (registerError.isNotEmpty()){
+            if (registerError.isNotEmpty()) {
+                Spacer(modifier = Modifier.height(8.dp))
                 Text(registerError, color = Color.Red)
             }
 
