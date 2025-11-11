@@ -51,8 +51,7 @@ fun SettingsScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF9F9F9))
-            .padding(horizontal = 16.dp)
+            .background(Color.White)
     ) {
         // Título
         Text(
@@ -64,14 +63,14 @@ fun SettingsScreen(navController: NavController) {
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 32.dp, bottom = 24.dp)
+                .padding(top = 16.dp, bottom = 8.dp)
         )
 
-        // Contenedor principal de opciones
+        // Contenido principal con peso
         Column(
             modifier = Modifier
-                .fillMaxWidth()
                 .weight(1f)
+                .padding(horizontal = 16.dp)
                 .background(Color.White, shape = RoundedCornerShape(16.dp))
                 .padding(vertical = 4.dp)
         ) {
@@ -79,9 +78,7 @@ fun SettingsScreen(navController: NavController) {
                 icon = Icons.Default.Key,
                 iconColor = Color(0xFFEDE430),
                 text = "Cambiar contraseña",
-                onClick = {
-                    navController.navigate("change_password")
-                }
+                onClick = { navController.navigate("change_password") }
             )
             Divider(thickness = 0.5.dp, color = Color(0xFFE0E0E0))
 
@@ -115,25 +112,21 @@ fun SettingsScreen(navController: NavController) {
             )
             Divider(thickness = 0.5.dp, color = Color(0xFFE0E0E0))
 
-            // NUEVA OPCIÓN: Cerrar sesión
+            // Cerrar sesión
             SettingItem(
                 icon = Icons.Default.ExitToApp,
                 iconColor = Color(0xFFE74C3C),
                 text = "Cerrar sesión",
                 onClick = {
-
-                    // Aquí va tu lógica para cerrar sesión
-                    // Por ejemplo, limpiar FirebaseAuth o SharedPreferences
+                    FirebaseAuth.getInstance().signOut()
                     navController.navigate("login") {
-                        popUpTo(0) // Limpia el stack de navegación
+                        popUpTo(0)
                     }
                 }
             )
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Barra inferior
+        // Barra inferior (pegada sin márgenes)
         BottomBar(navController = navController, currentRoute = currentRoute)
     }
 }

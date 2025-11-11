@@ -135,8 +135,8 @@ fun ChangePasswordScreen(navController: NavController) {
                 .height(50.dp),
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFFE1131F), // 🎨 color de fondo (amarillo)
-                contentColor = Color.Black           // 🎨 color del texto
+                containerColor = Color(0xFFE1131F),
+                contentColor = Color.White
             )
         ) {
             Text("Guardar cambios")

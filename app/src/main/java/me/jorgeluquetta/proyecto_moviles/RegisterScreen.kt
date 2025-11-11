@@ -56,33 +56,35 @@ import com.google.firebase.auth.auth
 @Preview
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegisterScreen(onClickBack :()-> Unit = {}, onSuccessfulRegister:()-> Unit = {}) {
+fun RegisterScreen(
+    onClickBack: () -> Unit = {},
+    onSuccessfulRegister: () -> Unit = {}
+) {
 
     val auth = Firebase.auth
     val activity = LocalView.current.context as Activity
 
-
-    //ESTADO DE LOS INPUT
+    // Estados de los inputs
     var inputName by remember { mutableStateOf("") }
     var inputEmail by remember { mutableStateOf("") }
     var inputPassword by remember { mutableStateOf("") }
     var inputPasswordConfirmation by remember { mutableStateOf("") }
 
+    // Errores
     var nameError by remember { mutableStateOf("") }
     var emailError by remember { mutableStateOf("") }
     var passwordError by remember { mutableStateOf("") }
     var confirmPasswordError by remember { mutableStateOf("") }
-
     var registerError by remember { mutableStateOf("") }
 
+    // Visibilidad de contraseñas
     var passwordVisible by remember { mutableStateOf(false) }
     var confirmPasswordVisible by remember { mutableStateOf(false) }
-
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { },
+                title = {},
                 navigationIcon = {
                     IconButton(onClick = onClickBack) {
                         Icon(
@@ -105,16 +107,16 @@ fun RegisterScreen(onClickBack :()-> Unit = {}, onSuccessfulRegister:()-> Unit =
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Ícono de Usuario
+
+            // Logo
             Image(
                 painter = painterResource(id = R.drawable.img_logo_movebga),
-                contentDescription = "Usuario",
+                contentDescription = "Logo",
                 modifier = Modifier.size(150.dp)
             )
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Título
             Text(
                 text = "Registro de Usuario",
                 fontSize = 24.sp,
@@ -124,21 +126,19 @@ fun RegisterScreen(onClickBack :()-> Unit = {}, onSuccessfulRegister:()-> Unit =
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Campo de Nombre
+            // Nombre
             OutlinedTextField(
                 value = inputName,
-                onValueChange = {inputName = it},
+                onValueChange = {
+                    inputName = it
+                    nameError = ""
+                },
                 label = { Text("Nombre") },
                 leadingIcon = {
                     Icon(imageVector = Icons.Default.Person, contentDescription = "Nombre")
                 },
                 supportingText = {
-                    if (nameError.isNotEmpty()){
-                        Text(
-                            text = nameError,
-                            color = Color.Red
-                        )
-                    }
+                    if (nameError.isNotEmpty()) Text(nameError, color = Color.Red)
                 },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp)
@@ -146,21 +146,19 @@ fun RegisterScreen(onClickBack :()-> Unit = {}, onSuccessfulRegister:()-> Unit =
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Campo de Correo Electrónico
+            // Correo
             OutlinedTextField(
                 value = inputEmail,
-                onValueChange = {inputEmail = it},
+                onValueChange = {
+                    inputEmail = it
+                    emailError = ""
+                },
                 label = { Text("Correo Electrónico") },
                 leadingIcon = {
                     Icon(imageVector = Icons.Default.Email, contentDescription = "Email")
                 },
                 supportingText = {
-                    if (emailError.isNotEmpty()){
-                        Text(
-                            text = emailError,
-                            color = Color.Red
-                        )
-                    }
+                    if (emailError.isNotEmpty()) Text(emailError, color = Color.Red)
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 modifier = Modifier.fillMaxWidth(),
@@ -169,36 +167,34 @@ fun RegisterScreen(onClickBack :()-> Unit = {}, onSuccessfulRegister:()-> Unit =
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Campo de Contraseña
+            // Contraseña
             OutlinedTextField(
                 value = inputPassword,
-                onValueChange = { inputPassword = it },
+                onValueChange = {
+                    inputPassword = it
+                    passwordError = ""
+                },
                 label = { Text("Contraseña") },
                 leadingIcon = {
                     Icon(imageVector = Icons.Default.Lock, contentDescription = "Contraseña")
                 },
                 trailingIcon = {
                     val icon = if (passwordVisible)
-                        Icons.Filled.Visibility
-                    else
-                        Icons.Filled.VisibilityOff
+                        Icons.Filled.Visibility else Icons.Filled.VisibilityOff
 
                     IconButton(onClick = { passwordVisible = !passwordVisible }) {
                         Icon(
                             imageVector = icon,
-                            contentDescription = if (passwordVisible) "Ocultar contraseña" else "Mostrar contraseña"
+                            contentDescription = if (passwordVisible)
+                                "Ocultar contraseña" else "Mostrar contraseña"
                         )
                     }
                 },
                 supportingText = {
-                    if (passwordError.isNotEmpty()) {
-                        Text(text = passwordError, color = Color.Red)
-                    }
+                    if (passwordError.isNotEmpty()) Text(passwordError, color = Color.Red)
                 },
                 visualTransformation = if (passwordVisible)
-                    VisualTransformation.None
-                else
-                    PasswordVisualTransformation(),
+                    VisualTransformation.None else PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp)
@@ -206,36 +202,34 @@ fun RegisterScreen(onClickBack :()-> Unit = {}, onSuccessfulRegister:()-> Unit =
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Campo de Confirmar Contraseña
+            // Confirmar contraseña
             OutlinedTextField(
                 value = inputPasswordConfirmation,
-                onValueChange = { inputPasswordConfirmation = it },
+                onValueChange = {
+                    inputPasswordConfirmation = it
+                    confirmPasswordError = ""
+                },
                 label = { Text("Confirmar Contraseña") },
                 leadingIcon = {
                     Icon(imageVector = Icons.Default.Lock, contentDescription = "Confirmar Contraseña")
                 },
                 trailingIcon = {
                     val icon = if (confirmPasswordVisible)
-                        Icons.Filled.Visibility
-                    else
-                        Icons.Filled.VisibilityOff
+                        Icons.Filled.Visibility else Icons.Filled.VisibilityOff
 
                     IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible }) {
                         Icon(
                             imageVector = icon,
-                            contentDescription = if (confirmPasswordVisible) "Ocultar contraseña" else "Mostrar contraseña"
+                            contentDescription = if (confirmPasswordVisible)
+                                "Ocultar contraseña" else "Mostrar contraseña"
                         )
                     }
                 },
                 supportingText = {
-                    if (confirmPasswordError.isNotEmpty()) {
-                        Text(text = confirmPasswordError, color = Color.Red)
-                    }
+                    if (confirmPasswordError.isNotEmpty()) Text(confirmPasswordError, color = Color.Red)
                 },
                 visualTransformation = if (confirmPasswordVisible)
-                    VisualTransformation.None
-                else
-                    PasswordVisualTransformation(),
+                    VisualTransformation.None else PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp)
@@ -248,38 +242,37 @@ fun RegisterScreen(onClickBack :()-> Unit = {}, onSuccessfulRegister:()-> Unit =
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Botón de Registro
+            // Botón de registro
             Button(
                 onClick = {
-                    val isValidName = validateName(inputName).first
-                    val isValidEmail = validateEmail(inputName).first
-                    val isValidPassword = validatePassword(inputPassword).first
-                    val isValidConfirmPasword =
-                        validateConfirmPassword(inputPassword, inputPasswordConfirmation).first
+                    val (isValidName, nameMsg) = validateName(inputName)
+                    val (isValidEmail, emailMsg) = validateEmail(inputEmail)
+                    val (isValidPassword, passMsg) = validatePassword(inputPassword)
+                    val (isValidConfirm, confirmMsg) =
+                        validateConfirmPassword(inputPassword, inputPasswordConfirmation)
 
-                    nameError = validateName(inputName).second
-                    emailError = validateEmail(inputName).second
-                    passwordError = validatePassword(inputPassword).second
-                    confirmPasswordError = validateConfirmPassword(inputPassword, inputPasswordConfirmation).second
+                    nameError = nameMsg
+                    emailError = emailMsg
+                    passwordError = passMsg
+                    confirmPasswordError = confirmMsg
 
-                    if (isValidName && isValidEmail && isValidPassword && isValidConfirmPasword){
+                    if (isValidName && isValidEmail && isValidPassword && isValidConfirm) {
                         auth.createUserWithEmailAndPassword(inputEmail, inputPassword)
                             .addOnCompleteListener(activity) { task ->
-                                if (task.isSuccessful){
+                                if (task.isSuccessful) {
                                     onSuccessfulRegister()
-                                }else{
-                                    registerError = when(task.isSuccessful){
-                                        is FirebaseAuthInvalidCredentialsException -> "Correo invalido"
+                                } else {
+                                    val ex = task.exception
+                                    registerError = when (ex) {
+                                        is FirebaseAuthInvalidCredentialsException -> "Correo inválido"
                                         is FirebaseAuthUserCollisionException -> "Correo ya registrado"
-                                        else -> "Error al iniciar sesión. Intenta de nuevo"
-
+                                        else -> ex?.localizedMessage ?: "Error al registrar. Intenta de nuevo"
                                     }
                                 }
                             }
-                    }else{
-                        registerError = "Hubo un error en el register"
+                    } else {
+                        registerError = "Por favor, corrige los errores antes de continuar"
                     }
-
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -287,11 +280,7 @@ fun RegisterScreen(onClickBack :()-> Unit = {}, onSuccessfulRegister:()-> Unit =
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE1131F))
             ) {
-                Text(
-                    text = "Registrarse",
-                    fontSize = 16.sp,
-                    color = Color.White
-                )
+                Text("Registrarse", fontSize = 16.sp, color = Color.White)
             }
         }
     }
