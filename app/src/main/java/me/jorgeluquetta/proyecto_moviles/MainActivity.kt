@@ -14,6 +14,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,10 +24,21 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             val busViewModel: BusViewModel = viewModel()
+            var startDestination = "welcome"
+
+            val auth = Firebase.auth
+            val currentUser = auth.currentUser
+
+            if (currentUser != null) {
+                startDestination = "map"
+            }else{
+                startDestination = "welcome"
+            }
+
             Scaffold { innerPadding ->
                 NavHost(
                     navController = navController,
-                    startDestination = "welcome",
+                    startDestination = startDestination,
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(innerPadding)
