@@ -85,7 +85,8 @@ fun SettingsScreen(navController: NavController) {
             SettingItem(
                 icon = Icons.Default.TextFields,
                 iconColor = Color(0xFFEDE430),
-                text = "Tamaño de texto"
+                text = "Tamaño de texto",
+                onClick = { navController.navigate("text_size") }
             )
             Divider(thickness = 0.5.dp, color = Color(0xFFE0E0E0))
 

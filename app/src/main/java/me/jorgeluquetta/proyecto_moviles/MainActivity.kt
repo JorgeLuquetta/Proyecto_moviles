@@ -85,6 +85,10 @@ class MainActivity : ComponentActivity() {
                     composable("change_password") {
                         ChangePasswordScreen(navController)
                     }
+                    // Pantalla de Tamaño de texto
+                    composable("text_size") {
+                        TextSizeScreen(navController)
+                    }
                 }
             }
         }
