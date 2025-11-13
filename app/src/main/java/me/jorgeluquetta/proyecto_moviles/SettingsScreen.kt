@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.Key
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.TextFields
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -47,6 +48,8 @@ import com.google.firebase.auth.FirebaseAuth
 fun SettingsScreen(navController: NavController) {
     val currentRoute = "settings"
     var darkMode by remember { mutableStateOf(false) }
+
+    var notificationsEnabled by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -90,26 +93,28 @@ fun SettingsScreen(navController: NavController) {
             )
             Divider(thickness = 0.5.dp, color = Color(0xFFE0E0E0))
 
-            SettingSwitchItem(
-                icon = Icons.Default.DarkMode,
+            SettingCheckItem(
+                icon = Icons.Default.Notifications,
                 iconColor = Color(0xFFEDE430),
-                text = "Modo oscuro",
-                checked = darkMode,
-                onCheckedChange = { darkMode = it }
+                text = "Notificaciones",
+                checked = notificationsEnabled,
+                onCheckedChange = { isChecked ->
+                    notificationsEnabled = isChecked
+                    if (isChecked) {
+                        println("Notificaciones activadas")
+                    } else {
+                        println("Notificaciones desactivadas")
+                    }
+                }
             )
             Divider(thickness = 0.5.dp, color = Color(0xFFE0E0E0))
 
-            SettingItem(
-                icon = Icons.Default.Notifications,
-                iconColor = Color(0xFFEDE430),
-                text = "Notificaciones"
-            )
-            Divider(thickness = 0.5.dp, color = Color(0xFFE0E0E0))
 
             SettingItem(
                 icon = Icons.Default.Security,
                 iconColor = Color(0xFFEDE430),
-                text = "Privacidad"
+                text = "Privacidad",
+                onClick = { navController.navigate("privacy") }
             )
             Divider(thickness = 0.5.dp, color = Color(0xFFE0E0E0))
 
@@ -167,7 +172,7 @@ fun SettingItem(
 }
 
 @Composable
-fun SettingSwitchItem(
+fun SettingCheckItem(
     icon: ImageVector,
     iconColor: Color,
     text: String,
@@ -177,6 +182,7 @@ fun SettingSwitchItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable { onCheckedChange(!checked) }
             .padding(vertical = 14.dp, horizontal = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -192,13 +198,9 @@ fun SettingSwitchItem(
             style = MaterialTheme.typography.bodyLarge.copy(color = Color.Black),
             modifier = Modifier.weight(1f)
         )
-        Switch(
+        Checkbox(
             checked = checked,
-            onCheckedChange = onCheckedChange,
-            colors = SwitchDefaults.colors(
-                checkedThumbColor = Color.White,
-                checkedTrackColor = Color(0xFF1E1E1E)
-            )
+            onCheckedChange = onCheckedChange
         )
     }
 }
