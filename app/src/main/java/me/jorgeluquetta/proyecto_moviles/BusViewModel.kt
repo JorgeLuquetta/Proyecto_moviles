@@ -698,8 +698,6 @@ class BusViewModel : ViewModel() {
     // Devuelve la información del bus
     fun getBusInfo(routeId: String): BusInfo? = busInfoMap[routeId]
 
-
-
 }
 
 

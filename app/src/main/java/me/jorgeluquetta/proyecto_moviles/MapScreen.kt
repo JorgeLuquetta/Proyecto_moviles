@@ -37,7 +37,7 @@
         var selectedBusInfo by remember { mutableStateOf<BusInfo?>(null) }
         var hasLocationPermission by remember { mutableStateOf(false) }
 
-        // 🚀 Launcher para pedir permiso
+        // Launcher para pedir permiso
         val permissionLauncher = rememberLauncherForActivityResult(
             contract = ActivityResultContracts.RequestPermission()
         ) { granted ->
